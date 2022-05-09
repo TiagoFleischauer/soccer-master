@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+  <section class="text-center container banner">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <div class="fw-light title">Soccer Master</div>
+        <p class="lead text-muted title-p">Welcome to Soccer Master! Try to guess the result of the next games of the Premier League, Brazilian League, and the MLS.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container marketing" style="padding-top: 20px;">
+
+    <div class="row">
+      <div class="col-lg-4">
+        <h2 style="color: blue;">Premier League</h2>
+        <p>The Premier League is the top level of the English soccer league system.
+        Most games are played on Saturday and Sunday afternoons. </p>
+        <p><a class="btn btn-secondary" href="https://en.wikipedia.org/wiki/Premier_League">View details &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <h2 style="color: rgb(255, 200, 0);">Campeonato Brasileiro Série A</h2>
+        <p>Série A is the top level of the Brazilian soccer.
+        There is no pattern to game days.</p>
+        <p><a class="btn btn-secondary" href="https://en.wikipedia.org/wiki/Campeonato_Brasileiro_S%C3%A9rie_A">View details &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <h2 style="color: red;">MLS</h2>
+        <p style="padding-bottom: 14px;">The Major League Soccer is the sport's highest level in the United States, which also has Canadian teams.</p>
+        <p><a class="btn btn-secondary" href="https://en.wikipedia.org/wiki/Major_League_Soccer">View details &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+    <div class="row align-items-md-stretch" style="padding-top: 100px;">
+      <div class="col-md-6">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+          <h2 style="padding-top: 35px;">This is not a bet game</h2>
+          <p>Soccer Master does not have an odds system. In general you will win a fixed amount of fictional money.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+          <h2>Guessing system</h2>
+          <p>If you guess right the result of a game, you will win $100.00. Otherwise, guessing wrong will cost you $30.00</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+          <h2>Combined feature</h2>
+          <p>You can select more than one game and make a combined guess. If you get all the results right, you will win what you normally would multiplied by
+          the number of games you guessed. On the other hand, if you get just one game wrong, you will lose $30.00 multiplied by the number of games.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+          <h2>Level</h2>
+          <p>At the beggining, you are only be able to guess 5 games, until the 5 are finished. But by increasing your level (by getting more and more results right), you will
+          be able to guess more games.</p>
+        </div>
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Delete Guesses
+{% endblock %}
+
+{% block main %}
+
+    {% if not_started_games %}
+
+        <div style="text-align: left;">
+            <h2>Delete Guesses</h2>
+            <h5>To uncheck an option, press the button player + CTRL</h5>
+        </div>
+        <hr>
+        <div>
+            <p>*Note that if you delete a game which
+            belongs to a combined group of 2,
+            it won't be combined anymore.<br>
+            You can check if a game is combined by
+            the divisions on the table.</p>
+        </div>
+
+        <form action="/delete" method="POST">
+
+            <div class="py-5" style="overflow-x:auto;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th><th><h3>League</h3></th>
+                            <th>Home Team</th>
+                            <th>Away Team</th>
+                            <th>Your Guess</th>
+                            <th>Datetime</th>
+                    </thead>
+                    <tbody>
+                        {% for game in not_started_games %}
+                            {% if not_started_games[loop.index] %}
+                                {% if game.combined and game.timestamp == not_started_games[loop.index].timestamp and not_started_games[loop.index].combined %}
+                                    {% set row_style = "" %}
+                                {% else %}
+                                    {% set row_style = "border-bottom: 1pt solid black;" %}
+                                {% endif %}
+                            {% endif %}
+                            <tr style="{{ row_style }}">
+                                <td><input name="{{ game.id }}" type="radio" value="{{ game.api_id }}"></td>
+                                <td>{{ game.league }}</td>
+                                <td>{{ game.home_name }} <img src = "{{ game.home_logo }}" style="height: 25px; width: 25px;"></td>
+                                <td><img src = "{{ game.away_logo }}" style="height: 25px; width: 25px;"> {{ game.away_name }}</td>
+                                <td>{{ game.guess }}</td>
+                                <td>{{ game.datetime }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <button class="btn btn-primary btn-lg" type="submit">Delete</button>
+
+        </form>
+    {% else %}
+        <h2>You have no games to delete.</h2>
+    {% endif %}
+
+    <script>
+        let radios = document.getElementsByTagName('input');
+        for(i=0; i<radios.length; i++ ) {
+            radios[i].onclick = function(e) {
+                if(e.ctrlKey || e.metaKey) {
+                    this.checked = false;
+                }
+            }
+        }
+    </script>
+
+{% endblock %}

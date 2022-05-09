@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Users
+{% endblock %}
+
+{% block main %}
+
+    {% if users|length > 0 %}
+
+        <div class="py-5" style="overflow-x:auto;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <form action="user_profile" method="POST">
+                        {% for user in users %}
+                            <tr>
+                                <td><button class="btn" type="submit" name="user" value="{{ user.username }}">{{ user.username }}</button></td>
+                            </tr>
+                        {% endfor %}
+                    </form>
+                </tbody>
+            </table>
+        </div>
+
+    {% else %}
+
+        <h2>No users where found.</h2>
+
+    {% endif %}
+
+{% endblock %}

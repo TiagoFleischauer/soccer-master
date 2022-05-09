@@ -1,0 +1,150 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Games
+{% endblock %}
+
+{% block main %}
+
+    {% if brazil_games or premier_games or mls_games %}
+        <div class="container">
+            <h5>Press the button next to the team you think will win. If you want to guess a draw, click on the middle.</h5>
+            <p><h6>If you want to uncheck a game, press the button game + CTRL</h6></p>
+        </div>
+        <div style="text-align: left;">
+            <h4>Allowed Guesses:</h4><h4 id="allowed_guesses">{{ allowed_guesses }}</h4>
+        </div>
+    {% else %}
+        <div class="container">
+            <h5>There aren't games available now.</h5>
+        </div>
+    {% endif %}
+
+    <form action="/guesses" method="post">
+
+        {% if brazil_games %}
+            <div class="py-5" style="overflow-x:auto;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th><h3>Brazil Série A</h3></th>
+                            <th colspan=2>Home Team</th>
+                            <th>Away Team</th>
+                            <th>Datetime <a href="https://time.is/">(UTC)</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for game in brazil_games %}
+                            {% if game.fixture.id not in list_of_guesses %}
+                                <tr>
+                                    <td></td><td><input name="{{ game.fixture.id }}" type="radio" value="{{ game.teams.home.name }}"> {{ game.teams.home.name }} <img src = "{{ game.teams.home.logo }}" style="height: 25px; width: 25px;"> {{ br_standings[game.teams.home.name] }}°</td>
+                                    <td><input name="{{ game.fixture.id }}" type="radio" value="Draw"></td>
+                                    <td>{{ br_standings[game.teams.away.name] }}° <img src = "{{ game.teams.away.logo }}" style="height: 25px; width: 25px;"> {{ game.teams.away.name }} <input name="{{ game.fixture.id }}" type="radio" value="{{ game.teams.away.name }}"> </td>
+                                    <td>{{  game.fixture.date[:-15] }} {{ game.fixture.date[11:-9] }}</td>
+                                </tr>
+                            {% else %}
+                                <tr style="background-color: rgb(189, 213, 219);">
+                                    <td>Already Guessed</td><td>{{ game.teams.home.name }} <img src = "{{ game.teams.home.logo }}" style="height: 25px; width: 25px;"> {{ br_standings[game.teams.home.name] }}°</td>
+                                    <td>v</td>
+                                    <td>{{ br_standings[game.teams.away.name] }}° <img src = "{{ game.teams.away.logo }}" style="height: 25px; width: 25px;"> {{ game.teams.away.name }}</td>
+                                    <td>{{  game.fixture.date[:-15] }} {{ game.fixture.date[11:-9] }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+        {% if premier_games %}
+            <div class="py-5">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th><h4>Premier League</h4></th>
+                            <th colspan="2">Home Team</th>
+                            <th>Away Team</th>
+                            <th>Datetime <a href="https://time.is/">(UTC)</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for game in premier_games %}
+                            {% if game.fixture.id not in list_of_guesses %}
+                                <tr>
+                                    <td></td><td><input name="{{ game.fixture.id }}" type="radio" value="{{ game.teams.home.name }}"> {{ game.teams.home.name }} <img src = "{{ game.teams.home.logo }}" style="height: 25px; width: 25px;"> {{ pr_standings[game.teams.home.name] }}°</td>
+                                    <td><input name="{{ game.fixture.id }}" type="radio" value="Draw"></td>
+                                    <td>{{ pr_standings[game.teams.away.name] }}° <img src = "{{ game.teams.away.logo }}" style="height: 25px; width: 25px;"> {{ game.teams.away.name }} <input name="{{ game.fixture.id }}" type="radio" value="{{ game.teams.away.name }}"> </td>
+                                    <td>{{  game.fixture.date[:-15] }} {{ game.fixture.date[11:-9] }}</td>
+                                </tr>
+                            {% else %}
+                                <tr style="background-color: rgb(189, 213, 219);">
+                                    <td>Already Guessed</td><td>{{ game.teams.home.name }} <img src = "{{ game.teams.home.logo }}" style="height: 25px; width: 25px;"> {{ pr_standings[game.teams.home.name] }}°</td>
+                                    <td>v</td>
+                                    <td>{{ pr_standings[game.teams.away.name] }}° <img src = "{{ game.teams.away.logo }}" style="height: 25px; width: 25px;"> {{ game.teams.away.name }}</td>
+                                    <td>{{  game.fixture.date[:-15] }} {{ game.fixture.date[11:-9] }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+        {% if mls_games %}
+            <div class="py-5">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th><h3>MLS</h3></th>
+                            <th colspan="2">Home Team</th>
+                            <th>Away Team</th>
+                            <th>Datetime <a href="https://time.is/">(UTC)</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for game in mls_games %}
+                            {% if game.fixture.id not in list_of_guesses %}
+                                <tr>
+                                    <td></td><td><input name="{{ game.fixture.id }}" type="radio" value="{{ game.teams.home.name }}"> {{ game.teams.home.name }} <img src = "{{ game.teams.home.logo }}" style="height: 25px; width: 25px;"> {{ mls_standings[game.teams.home.name] }}°</td>
+                                    <td><input name="{{ game.fixture.id }}" type="radio" value="Draw"></td>
+                                    <td>{{ mls_standings[game.teams.away.name] }}°<img src = "{{ game.teams.away.logo }}" style="height: 25px; width: 25px;"> {{ game.teams.away.name }} <input name="{{ game.fixture.id }}" type="radio" value="{{ game.teams.away.name }}"> </td>
+                            {% else %}
+                                <tr style="background-color: rgb(189, 213, 219);">
+                                    <td>Already Guessed</td><td>{{ game.teams.home.name }} <img src = "{{ game.teams.home.logo }}" style="height: 25px; width: 25px;"> {{ mls_standings[game.teams.home.name] }}°</td>
+                                    <td>v</td>
+                                    <td>{{ mls_standings[game.teams.away.name] }}° <img src = "{{ game.teams.away.logo }}" style="height: 25px; width: 25px;"> {{ game.teams.away.name }}</td>
+                            {% endif %}
+                                    <td>{{  game.fixture.date[:-15] }} {{ game.fixture.date[11:-9] }}</td>
+                                </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+        {% if brazil_games or premier_games or mls_games %}
+            {% if allowed_guesses > 0 %}
+                <button class="btn btn-primary btn-lg" type="submit" name="submit_button" value="simple">Simple Guess</button>
+                <button class="btn btn-primary btn-lg" type="submit" name="submit_button" value="combined">Combined Guess</button>
+            {% endif %}
+        {% endif %}
+    </form>
+    <script>
+        let radios = document.getElementsByTagName('input');
+        for(i=0; i<radios.length; i++ ) {
+            radios[i].onclick = function(e) {
+                if(e.ctrlKey || e.metaKey) {
+                    this.checked = false;
+                }
+            }
+        }
+
+        $("input[type='radio']").change(function(){
+          	let count = $("input[type='radio']:checked").length;
+        	if(count>(document.getElementById("allowed_guesses").innerHTML)){
+        		$(this).prop('checked', false);
+        		alert("You cannot select more games than your level allows");
+        	}
+        });
+
+    </script>
+
+
+{% endblock %}

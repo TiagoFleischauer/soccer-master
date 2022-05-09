@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block main %}
+
+    <div class="py-5" style="overflow-x:auto;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Cash</th>
+                    <th>Level</th>
+                    <th>Total Received</th>
+                    <th>Total Spent in Tokens</th>
+                </tr>
+            </head>
+            <tbody>
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>${{ user.cash }}</td>
+                    <td>{{ user.level }}</td>
+                    <td>${{ user.received }}</td>
+                    <td>${{ spent }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    {% if user_tokens %}
+        <div style="margin-bottom: 50px;">
+            <h2>Your Tokens ({{ number_of_tokens }})</h2>
+        </div>
+        <div class="gallery">
+            {% for player in user_tokens %}
+                <img class="token" src="static/images/{{ player.url }}" alt="{{ player.name }}"/>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div>
+            <h2><a href="/tokens">Buy Tokens</a></h2>
+        </div>
+    {% endif %}
+
+{% endblock %}

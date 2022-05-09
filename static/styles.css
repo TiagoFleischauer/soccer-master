@@ -1,0 +1,88 @@
+body
+{
+    font-family: 'Arvo', serif;
+}
+
+.title
+{
+    margin-bottom: 35px;
+    font-size: 60px;
+}
+
+.title-p
+{
+    margin-bottom: 50px;
+}
+
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+}
+
+
+main .form-control
+{
+    /* Center form controls */
+    display: inline-block;
+
+    /* Override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    overflow-x: auto;
+    text-align: center;
+}
+
+main img
+{
+    max-width: 100%;
+}
+
+.search-box
+{
+    position: relative;
+    height: 40px;
+    border-radius: 40px;
+    padding: 4px;
+}
+
+
+.marketing .col-lg-4 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.marketing .col-lg-4 p {
+  margin-right: .75rem;
+  margin-left: .75rem;
+}
+
+.gallery
+{
+    margin: 10px 50px;
+}
+
+.gallery img
+{
+    border-radius: 50%;
+    transition: 1s;
+    padding: 15px;
+    width: 250px;
+}
+
+.token:hover {
+    margin-top: -20px;
+    box-shadow:
+    white 0.006em 0.006em 0.007em,
+    #9c9c9c 1px 1px 1px,
+    #9c9c9c 1px 2px 1px,
+    rgba(16, 16, 16, 0.4) 1px 38px 26px,
+    rgba(16, 16, 16, 0.2) 1px 42px 30px,
+    rgba(16, 16, 16, 0.2) 1px 46px 65px,
+    rgba(16, 16, 16, 0.4) 1px 50px 95px,
+    rgba(16, 16, 16, 0.4) 1px 54px 125px,
+    white -0.15em -0.1em 100px;
+}
