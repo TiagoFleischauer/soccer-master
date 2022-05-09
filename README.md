@@ -2,7 +2,7 @@
 
 ### Description:
 
-Soccer master is a website game where you can try to guess the results of the next games of the Premier League, Brazilian League and MLS (Major League Soccer) soccer leagues.
+Soccer master is a web application where you can try to guess the results of the next games of the Premier League, Brazilian League and MLS (Major League Soccer) soccer leagues.
 The project uses the API-FOOTBALL: https://www.api-football.com/
 The games available to guess will always start from today's date to tomorrow's date.
 The users can guess a maximum number of games, according to their level. First, the users are only able to guess 5 games. The higher the level, the higher the number of games the users can guess.
